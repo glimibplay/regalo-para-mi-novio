@@ -1,0 +1,3795 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jurassic Love ❤️</title>
+
+<style>
+
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+body {
+    color: white;
+}
+
+
+/* =====================================================
+   PANTALLA DE CARGA
+===================================================== */
+
+#loadingScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #111 0%,
+            #050505 50%,
+            #000 100%
+        );
+
+    z-index: 100;
+
+    transition:
+        opacity 1s ease;
+}
+
+
+.loadingBox {
+
+    width:
+        min(90%, 650px);
+
+    text-align:
+        center;
+}
+
+
+.jurassicTitle {
+
+    font-size:
+        clamp(28px, 6vw, 64px);
+
+    letter-spacing:
+        5px;
+
+    margin-bottom:
+        30px;
+
+    color:
+        #d6d6d6;
+
+    text-shadow:
+        3px 3px 0 #222,
+        0 0 15px rgba(
+            255,
+            255,
+            255,
+            .15
+        );
+}
+
+
+.loadingText {
+
+    min-height:
+        30px;
+
+    font-size:
+        clamp(13px, 2vw, 18px);
+
+    color:
+        #aaa;
+
+    margin-bottom:
+        18px;
+}
+
+
+.progressContainer {
+
+    width:
+        100%;
+
+    height:
+        22px;
+
+    border:
+        3px solid #777;
+
+    background:
+        #111;
+
+    padding:
+        3px;
+}
+
+
+.progressBar {
+
+    width:
+        0%;
+
+    height:
+        100%;
+
+    background:
+        #d7d7d7;
+
+    transition:
+        width .2s linear;
+}
+
+
+.loadingPercentage {
+
+    margin-top:
+        10px;
+
+    font-size:
+        13px;
+
+    color:
+        #888;
+}
+
+
+
+/* =====================================================
+   HUEVO
+===================================================== */
+
+#eggScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-direction:
+        column;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #141414 0%,
+            #060606 60%,
+            #000 100%
+        );
+
+    z-index: 80;
+}
+
+
+.eggInstruction {
+
+    margin-bottom:
+        35px;
+
+    color:
+        #aaa;
+
+    text-align:
+        center;
+
+    font-size:
+        16px;
+
+    animation:
+        blink 1.5s infinite;
+}
+
+
+@keyframes blink {
+
+    50% {
+        opacity:
+            .35;
+    }
+
+}
+
+
+.egg {
+
+    position:
+        relative;
+
+    width:
+        135px;
+
+    height:
+        170px;
+
+    cursor:
+        pointer;
+
+    filter:
+        drop-shadow(
+            0 0 20px
+            rgba(
+                255,
+                255,
+                255,
+                .12
+            )
+        );
+
+    animation:
+        eggMove 2.5s
+        ease-in-out infinite;
+
+    transition:
+        transform .15s;
+}
+
+
+.egg:hover {
+
+    transform:
+        scale(1.06);
+}
+
+
+@keyframes eggMove {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-25px)
+            rotate(-2deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(25px)
+            rotate(2deg);
+    }
+
+}
+
+
+.eggBody {
+
+    position:
+        absolute;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    border-radius:
+        53% 47% 45% 55%
+        / 60% 60% 40% 40%;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fafafa 0%,
+            #ddd 25%,
+            #999 58%,
+            #555 100%
+        );
+
+    border:
+        5px solid #ddd;
+}
+
+
+.spot {
+
+    position:
+        absolute;
+
+    border-radius:
+        50%;
+
+    background:
+        #777;
+}
+
+
+.spot1 {
+
+    width:
+        14px;
+
+    height:
+        14px;
+
+    top:
+        35px;
+
+    left:
+        30px;
+}
+
+
+.spot2 {
+
+    width:
+        9px;
+
+    height:
+        9px;
+
+    top:
+        75px;
+
+    right:
+        30px;
+}
+
+
+.spot3 {
+
+    width:
+        18px;
+
+    height:
+        18px;
+
+    bottom:
+        38px;
+
+    left:
+        43px;
+}
+
+
+.spot4 {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    bottom:
+        60px;
+
+    right:
+        43px;
+}
+
+
+.egg.hatching {
+
+    animation:
+        hatchShake .12s infinite;
+}
+
+
+@keyframes hatchShake {
+
+    0% {
+
+        transform:
+            translateX(-8px)
+            rotate(-4deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(8px)
+            rotate(4deg);
+    }
+
+    100% {
+
+        transform:
+            translateX(-8px)
+            rotate(-4deg);
+    }
+
+}
+
+
+.eggCrack {
+
+    position:
+        absolute;
+
+    width:
+        5px;
+
+    height:
+        55px;
+
+    background:
+        #222;
+
+    top:
+        55px;
+
+    left:
+        65px;
+
+    transform:
+        rotate(12deg);
+
+    opacity:
+        0;
+
+    z-index:
+        5;
+}
+
+
+.eggCrack::before,
+.eggCrack::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        5px;
+
+    height:
+        25px;
+
+    background:
+        #222;
+}
+
+
+.eggCrack::before {
+
+    transform:
+        rotate(-45deg);
+
+    top:
+        10px;
+
+    left:
+        -12px;
+}
+
+
+.eggCrack::after {
+
+    transform:
+        rotate(45deg);
+
+    bottom:
+        4px;
+
+    left:
+        11px;
+}
+
+
+.egg.hatching
+.eggCrack {
+
+    opacity:
+        1;
+}
+
+
+
+/* =====================================================
+   CARTA
+===================================================== */
+
+#letterScreen {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    display:
+        none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(
+                30,
+                30,
+                30,
+                .96
+            ),
+            #000
+        );
+
+    z-index:
+        70;
+
+    padding:
+        20px;
+}
+
+
+.letter {
+
+    width:
+        min(
+            600px,
+            92vw
+        );
+
+    background:
+        #f0e4c4;
+
+    color:
+        #302a20;
+
+    padding:
+        36px;
+
+    border-radius:
+        4px;
+
+    box-shadow:
+        0 0 0 4px #4b3d2c,
+        0 20px 60px
+        rgba(
+            0,
+            0,
+            0,
+            .75
+        );
+
+    transform:
+        scale(.7);
+
+    opacity:
+        0;
+
+    animation:
+        letterOpen .8s
+        ease forwards;
+
+    position:
+        relative;
+}
+
+
+@keyframes letterOpen {
+
+    to {
+
+        transform:
+            scale(1);
+
+        opacity:
+            1;
+    }
+
+}
+
+
+.letter::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        10px;
+
+    border:
+        1px solid
+        rgba(
+            50,
+            40,
+            25,
+            .35
+        );
+
+    pointer-events:
+        none;
+}
+
+
+.letter h2 {
+
+    text-align:
+        center;
+
+    margin-bottom:
+        25px;
+
+    font-size:
+        26px;
+}
+
+
+.letter p {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        19px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+}
+
+
+.letterHeart {
+
+    text-align:
+        center;
+
+    font-size:
+        40px;
+
+    margin:
+        15px 0;
+}
+
+
+.closeLetter {
+
+    display:
+        block;
+
+    margin:
+        28px auto 0;
+
+    border:
+        none;
+
+    background:
+        #302a20;
+
+    color:
+        white;
+
+    padding:
+        12px 25px;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    cursor:
+        pointer;
+
+    font-size:
+        15px;
+}
+
+
+.closeLetter:hover {
+
+    background:
+        #514535;
+}
+
+
+
+/* =====================================================
+   ESCENA FINAL
+===================================================== */
+
+#gameScreen {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    display:
+        none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #01020a 0%,
+            #050817 35%,
+            #0a1027 65%,
+            #111a30 100%
+        );
+
+    overflow:
+        hidden;
+
+    z-index:
+        10;
+}
+
+
+
+/* =====================================================
+   LUNA
+===================================================== */
+
+.moon {
+
+    position:
+        absolute;
+
+    width:
+        75px;
+
+    height:
+        75px;
+
+    border-radius:
+        50%;
+
+    background:
+        #ecebdc;
+
+    top:
+        10%;
+
+    right:
+        12%;
+
+    box-shadow:
+        0 0 35px
+        rgba(
+            240,
+            240,
+            210,
+            .25
+        );
+
+    z-index:
+        2;
+}
+
+
+.moon::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        75px;
+
+    height:
+        75px;
+
+    border-radius:
+        50%;
+
+    background:
+        #050717;
+
+    left:
+        20px;
+
+    top:
+        -7px;
+}
+
+
+
+/* =====================================================
+   ESTRELLAS DEL CIELO
+===================================================== */
+
+.backgroundStar {
+
+    position:
+        absolute;
+
+    width:
+        2px;
+
+    height:
+        2px;
+
+    background:
+        white;
+
+    opacity:
+        .7;
+
+    box-shadow:
+        0 0 4px
+        rgba(
+            255,
+            255,
+            255,
+            .7
+        );
+
+    z-index:
+        1;
+}
+
+
+
+/* =====================================================
+   FUEGOS ARTIFICIALES
+===================================================== */
+
+#fireworksCanvas {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    z-index:
+        3;
+
+    pointer-events:
+        none;
+}
+
+
+
+/* =====================================================
+   TE AMO MUCHO
+===================================================== */
+
+#starCanvas {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    z-index:
+        5;
+
+    pointer-events:
+        none;
+}
+
+
+
+/* =====================================================
+   PAREJA
+===================================================== */
+
+#coupleCanvas {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    z-index:
+        7;
+
+    pointer-events:
+        none;
+
+    image-rendering:
+        pixelated;
+}
+
+
+
+/* =====================================================
+   TEXTO SUPERIOR
+===================================================== */
+
+.gameMessage {
+
+    position:
+        absolute;
+
+    top:
+        6%;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .5
+        );
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        3px;
+
+    text-align:
+        center;
+
+    z-index:
+        8;
+
+    white-space:
+        nowrap;
+}
+
+
+
+/* =====================================================
+   MENSAJE FINAL
+===================================================== */
+
+.finalHint {
+
+    position:
+        absolute;
+
+    bottom:
+        7%;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        2px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .4
+        );
+
+    opacity:
+        0;
+
+    transition:
+        opacity 2s;
+
+    z-index:
+        8;
+
+    text-align:
+        center;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (
+    max-width: 700px
+) {
+
+    .letter {
+
+        padding:
+            28px 22px;
+    }
+
+
+    .letter p {
+
+        font-size:
+            16px;
+
+        line-height:
+            1.6;
+    }
+
+
+    .moon {
+
+        width:
+            55px;
+
+        height:
+            55px;
+
+        right:
+            8%;
+    }
+
+
+    .moon::after {
+
+        width:
+            55px;
+
+        height:
+            55px;
+    }
+
+
+    .gameMessage {
+
+        font-size:
+            8px;
+
+        letter-spacing:
+            2px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PANTALLA DE CARGA
+===================================================== -->
+
+<section id="loadingScreen">
+
+    <div class="loadingBox">
+
+        <div class="jurassicTitle">
+            CARGANDO EL MUNDO
+        </div>
+
+
+        <div
+            id="loadingText"
+            class="loadingText"
+        >
+            Iniciando...
+        </div>
+
+
+        <div class="progressContainer">
+
+            <div
+                id="progressBar"
+                class="progressBar"
+            ></div>
+
+        </div>
+
+
+        <div
+            id="loadingPercentage"
+            class="loadingPercentage"
+        >
+            0%
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HUEVO
+===================================================== -->
+
+<section id="eggScreen">
+
+    <div class="eggInstruction">
+
+        Algo está esperando por ti...
+
+        <br><br>
+
+        <b>
+            Haz clic en el huevo.
+        </b>
+
+    </div>
+
+
+    <div
+        id="egg"
+        class="egg"
+    >
+
+        <div class="eggBody">
+
+            <div class="spot spot1"></div>
+
+            <div class="spot spot2"></div>
+
+            <div class="spot spot3"></div>
+
+            <div class="spot spot4"></div>
+
+        </div>
+
+        <div class="eggCrack"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CARTA
+===================================================== -->
+
+<section id="letterScreen">
+
+    <div class="letter">
+
+        <h2>
+            Para ti ❤️
+        </h2>
+
+
+        <p>
+
+            Sin importar la distancia y el tiempo,
+            eres el chico que más amo.
+            En un día como hoy todos regalan algo
+            para recordarle a su pareja lo tan
+            especiales que son, y contigo no hay
+            excepción, así que te dedico este sitio
+            que hice para ti con mucho cariño.
+
+            <br><br>
+
+            Te amo, mi tocallito hermoso.
+
+        </p>
+
+
+        <div class="letterHeart">
+            ❤️
+        </div>
+
+
+        <button
+            id="closeLetter"
+            class="closeLetter"
+        >
+            CERRAR CARTA
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ESCENA FINAL
+===================================================== -->
+
+<section id="gameScreen">
+
+    <div class="moon"></div>
+
+
+    <div
+        id="backgroundStars"
+    ></div>
+
+
+    <canvas
+        id="fireworksCanvas"
+    ></canvas>
+
+
+    <canvas
+        id="starCanvas"
+    ></canvas>
+
+
+    <!-- USTEDES + MONTAÑA -->
+
+    <canvas
+        id="coupleCanvas"
+    ></canvas>
+
+
+    <div class="gameMessage">
+
+        UNA HISTORIA ESCRITA
+        EN LAS ESTRELLAS
+
+    </div>
+
+
+    <div
+        id="finalHint"
+        class="finalHint"
+    >
+
+        HECHO CON TODO MI AMOR ❤️
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const loadingScreen =
+    document.getElementById(
+        "loadingScreen"
+    );
+
+
+const loadingText =
+    document.getElementById(
+        "loadingText"
+    );
+
+
+const progressBar =
+    document.getElementById(
+        "progressBar"
+    );
+
+
+const loadingPercentage =
+    document.getElementById(
+        "loadingPercentage"
+    );
+
+
+const eggScreen =
+    document.getElementById(
+        "eggScreen"
+    );
+
+
+const egg =
+    document.getElementById(
+        "egg"
+    );
+
+
+const letterScreen =
+    document.getElementById(
+        "letterScreen"
+    );
+
+
+const closeLetter =
+    document.getElementById(
+        "closeLetter"
+    );
+
+
+const gameScreen =
+    document.getElementById(
+        "gameScreen"
+    );
+
+
+const starCanvas =
+    document.getElementById(
+        "starCanvas"
+    );
+
+
+const ctx =
+    starCanvas.getContext(
+        "2d"
+    );
+
+
+const fireworksCanvas =
+    document.getElementById(
+        "fireworksCanvas"
+    );
+
+
+const fwCtx =
+    fireworksCanvas.getContext(
+        "2d"
+    );
+
+
+const coupleCanvas =
+    document.getElementById(
+        "coupleCanvas"
+    );
+
+
+const coupleCtx =
+    coupleCanvas.getContext(
+        "2d"
+    );
+
+
+const backgroundStars =
+    document.getElementById(
+        "backgroundStars"
+    );
+
+
+const finalHint =
+    document.getElementById(
+        "finalHint"
+    );
+
+
+
+/* =====================================================
+   CARGANDO
+===================================================== */
+
+const messages = [
+
+    "Cargando nuestras vidas...",
+
+    "Espera, ya casi falta poco...",
+
+    "Por ti vale la pena cualquier espera...",
+
+    "Te quiero mucho..."
+
+];
+
+
+let progress = 0;
+
+let messageIndex = 0;
+
+
+const loadingInterval =
+    setInterval(
+        () => {
+
+            progress += 1;
+
+
+            progressBar.style.width =
+                progress + "%";
+
+
+            loadingPercentage.textContent =
+                progress + "%";
+
+
+            /*
+               Los cuatro mensajes
+               aparecen en diferentes
+               partes de la carga.
+            */
+
+            if (
+                progress >= 20 &&
+                messageIndex === 0
+            ) {
+
+                loadingText.textContent =
+                    "> " +
+                    messages[0];
+
+                messageIndex++;
+
+            }
+
+
+            if (
+                progress >= 40 &&
+                messageIndex === 1
+            ) {
+
+                loadingText.textContent =
+                    "> " +
+                    messages[1];
+
+                messageIndex++;
+
+            }
+
+
+            if (
+                progress >= 60 &&
+                messageIndex === 2
+            ) {
+
+                loadingText.textContent =
+                    "> " +
+                    messages[2];
+
+                messageIndex++;
+
+            }
+
+
+            if (
+                progress >= 80 &&
+                messageIndex === 3
+            ) {
+
+                loadingText.textContent =
+                    "> " +
+                    messages[3];
+
+                messageIndex++;
+
+            }
+
+
+            if (
+                progress >= 100
+            ) {
+
+                clearInterval(
+                    loadingInterval
+                );
+
+
+                loadingText.textContent =
+                    "> Bienvenido...";
+
+
+                setTimeout(
+                    () => {
+
+                        loadingScreen.style.opacity =
+                            "0";
+
+
+                        setTimeout(
+                            () => {
+
+                                loadingScreen.style.display =
+                                    "none";
+
+
+                                eggScreen.style.display =
+                                    "flex";
+
+                            },
+                            1000
+                        );
+
+                    },
+                    900
+                );
+
+            }
+
+        },
+        45
+    );
+
+
+
+/* =====================================================
+   HUEVO
+===================================================== */
+
+let eggClicked = false;
+
+
+egg.addEventListener(
+    "click",
+    () => {
+
+        if (
+            eggClicked
+        ) return;
+
+
+        eggClicked =
+            true;
+
+
+        egg.classList.add(
+            "hatching"
+        );
+
+
+        setTimeout(
+            () => {
+
+                egg.style.transition =
+                    "transform .5s, opacity .5s";
+
+
+                egg.style.transform =
+                    "scale(1.5)";
+
+
+                egg.style.opacity =
+                    "0";
+
+            },
+            1200
+        );
+
+
+        setTimeout(
+            () => {
+
+                eggScreen.style.display =
+                    "none";
+
+
+                letterScreen.style.display =
+                    "flex";
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   CARTA
+===================================================== */
+
+closeLetter.addEventListener(
+    "click",
+    () => {
+
+        letterScreen.style.display =
+            "none";
+
+
+        gameScreen.style.display =
+            "block";
+
+
+        startGame();
+
+    }
+);
+
+
+
+/* =====================================================
+   ESTRELLAS DE FONDO
+===================================================== */
+
+function createBackgroundStars() {
+
+    backgroundStars.innerHTML =
+        "";
+
+
+    const amount =
+        window.innerWidth < 600
+            ? 90
+            : 170;
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        const star =
+            document.createElement(
+                "div"
+            );
+
+
+        star.classList.add(
+            "backgroundStar"
+        );
+
+
+        star.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        star.style.top =
+            Math.random() *
+            78 +
+            "%";
+
+
+        const size =
+            Math.random() < .85
+                ? 2
+                : 3;
+
+
+        star.style.width =
+            size + "px";
+
+
+        star.style.height =
+            size + "px";
+
+
+        star.style.opacity =
+            (
+                .25 +
+                Math.random() *
+                .75
+            ).toFixed(2);
+
+
+        backgroundStars.appendChild(
+            star
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LETRAS PIXEL ART
+===================================================== */
+
+const letters = {
+
+
+    T: [
+
+        "1111111",
+        "0011100",
+        "0011100",
+        "0011100",
+        "0011100",
+        "0011100",
+        "0011100",
+        "0011100"
+
+    ],
+
+
+    E: [
+
+        "1111111",
+        "1100000",
+        "1100000",
+        "1111110",
+        "1100000",
+        "1100000",
+        "1111111",
+        "0000000"
+
+    ],
+
+
+    A: [
+
+        "0011100",
+        "0110110",
+        "1100011",
+        "1100011",
+        "1111111",
+        "1100011",
+        "1100011",
+        "0000000"
+
+    ],
+
+
+    M: [
+
+        "1100011",
+        "1110111",
+        "1111111",
+        "1101111",
+        "1101011",
+        "1100011",
+        "1100011",
+        "0000000"
+
+    ],
+
+
+    O: [
+
+        "0111110",
+        "1100011",
+        "1100011",
+        "1100011",
+        "1100011",
+        "1100011",
+        "0111110",
+        "0000000"
+
+    ],
+
+
+    U: [
+
+        "1100011",
+        "1100011",
+        "1100011",
+        "1100011",
+        "1100011",
+        "1100011",
+        "0111110",
+        "0000000"
+
+    ],
+
+
+    C: [
+
+        "0111111",
+        "1100000",
+        "1100000",
+        "1100000",
+        "1100000",
+        "1100000",
+        "0111111",
+        "0000000"
+
+    ],
+
+
+    H: [
+
+        "1100011",
+        "1100011",
+        "1100011",
+        "1111111",
+        "1100011",
+        "1100011",
+        "1100011",
+        "0000000"
+
+    ],
+
+
+    HEART: [
+
+        "0011001100",
+        "0111111110",
+        "1111111111",
+        "1111111111",
+        "0111111110",
+        "0011111100",
+        "0001111000",
+        "0000110000"
+
+    ]
+
+};
+
+
+
+/* =====================================================
+   TAMAÑO DE PIXEL
+===================================================== */
+
+function getPixelSize() {
+
+    if (
+        window.innerWidth <= 500
+    ) {
+
+        return 4;
+
+    }
+
+
+    if (
+        window.innerWidth <= 800
+    ) {
+
+        return 5;
+
+    }
+
+
+    return 6;
+
+}
+
+
+
+/* =====================================================
+   CREAR PUNTOS DEL MENSAJE
+===================================================== */
+
+function getPixelPoints() {
+
+    const points = [];
+
+
+    const text1 = [
+
+        "T",
+        "E",
+        "A",
+        "M",
+        "O"
+
+    ];
+
+
+    const text2 = [
+
+        "M",
+        "U",
+        "C",
+        "H",
+        "O"
+
+    ];
+
+
+    const pixelSize =
+        getPixelSize();
+
+
+    const spacing =
+        window.innerWidth <= 500
+            ? 8
+            : 12;
+
+
+
+    /* ================================================
+       TE AMO
+    ================================================ */
+
+    const firstWidth =
+
+        (
+            5 *
+            7 *
+            pixelSize
+        )
+
+        +
+
+        (
+            4 *
+            spacing
+        );
+
+
+    let startX1 =
+
+        (
+            window.innerWidth -
+            firstWidth
+        ) / 2;
+
+
+    const centerY1 =
+
+        window.innerHeight *
+        .30;
+
+
+    text1.forEach(
+        letter => {
+
+            const pattern =
+                letters[letter];
+
+
+            pattern.forEach(
+                (
+                    row,
+                    y
+                ) => {
+
+                    row
+                    .split("")
+                    .forEach(
+                        (
+                            value,
+                            x
+                        ) => {
+
+                            if (
+                                value ===
+                                "1"
+                            ) {
+
+                                points.push({
+
+                                    x:
+                                        startX1 +
+                                        x *
+                                        pixelSize,
+
+                                    y:
+                                        centerY1 +
+                                        y *
+                                        pixelSize
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            startX1 +=
+
+                7 *
+                pixelSize +
+                spacing;
+
+        }
+    );
+
+
+
+    /* ================================================
+       MUCHO
+    ================================================ */
+
+    const secondWidth =
+
+        (
+            5 *
+            7 *
+            pixelSize
+        )
+
+        +
+
+        (
+            4 *
+            spacing
+        );
+
+
+    let startX2 =
+
+        (
+            window.innerWidth -
+            secondWidth
+        ) / 2;
+
+
+    const centerY2 =
+
+        window.innerHeight *
+        .52;
+
+
+    text2.forEach(
+        letter => {
+
+            const pattern =
+                letters[letter];
+
+
+            pattern.forEach(
+                (
+                    row,
+                    y
+                ) => {
+
+                    row
+                    .split("")
+                    .forEach(
+                        (
+                            value,
+                            x
+                        ) => {
+
+                            if (
+                                value ===
+                                "1"
+                            ) {
+
+                                points.push({
+
+                                    x:
+                                        startX2 +
+                                        x *
+                                        pixelSize,
+
+                                    y:
+                                        centerY2 +
+                                        y *
+                                        pixelSize
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            startX2 +=
+
+                7 *
+                pixelSize +
+                spacing;
+
+        }
+    );
+
+
+
+    /* ================================================
+       CORAZÓN
+    ================================================ */
+
+    const heart =
+        letters.HEART;
+
+
+    const heartStartX =
+
+        (
+            window.innerWidth -
+            10 *
+            pixelSize
+        ) / 2;
+
+
+    const heartStartY =
+
+        window.innerHeight *
+        .70;
+
+
+    heart.forEach(
+        (
+            row,
+            y
+        ) => {
+
+            row
+            .split("")
+            .forEach(
+                (
+                    value,
+                    x
+                ) => {
+
+                    if (
+                        value ===
+                        "1"
+                    ) {
+
+                        points.push({
+
+                            x:
+                                heartStartX +
+                                x *
+                                pixelSize,
+
+                            y:
+                                heartStartY +
+                                y *
+                                pixelSize
+
+                        });
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    return points;
+
+}
+
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+function resizeCanvas() {
+
+    starCanvas.width =
+        window.innerWidth;
+
+    starCanvas.height =
+        window.innerHeight;
+
+
+    fireworksCanvas.width =
+        window.innerWidth;
+
+    fireworksCanvas.height =
+        window.innerHeight;
+
+
+    coupleCanvas.width =
+        window.innerWidth;
+
+    coupleCanvas.height =
+        window.innerHeight;
+
+
+    coupleCtx.imageSmoothingEnabled =
+        false;
+
+}
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        resizeCanvas();
+
+
+        if (
+            animationStarted
+        ) {
+
+            stars =
+                getPixelPoints();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   ANIMACIÓN ESTRELLAS
+===================================================== */
+
+let stars = [];
+
+
+function startStarsAnimation() {
+
+    resizeCanvas();
+
+
+    stars =
+        getPixelPoints();
+
+
+    /*
+       Las estrellas se mezclan.
+    */
+
+    stars.sort(
+        () =>
+            Math.random() -
+            .5
+    );
+
+
+    let visible = 0;
+
+
+    function draw() {
+
+        ctx.clearRect(
+
+            0,
+            0,
+
+            starCanvas.width,
+            starCanvas.height
+
+        );
+
+
+        for (
+            let i = 0;
+            i < visible;
+            i++
+        ) {
+
+            const star =
+                stars[i];
+
+
+            if (
+                !star
+            ) continue;
+
+
+            const size =
+                getPixelSize();
+
+
+            ctx.shadowBlur =
+                size * 1.4;
+
+
+            ctx.shadowColor =
+                "rgba(255,255,255,.8)";
+
+
+            ctx.fillStyle =
+                "rgba(255,255,255,.97)";
+
+
+            ctx.fillRect(
+
+                Math.round(
+                    star.x
+                ),
+
+                Math.round(
+                    star.y
+                ),
+
+                size,
+
+                size
+
+            );
+
+
+            ctx.shadowBlur =
+                0;
+
+        }
+
+
+        if (
+            visible <
+            stars.length
+        ) {
+
+            visible += 1;
+
+
+            requestAnimationFrame(
+                draw
+            );
+
+        }
+        else {
+
+            startTwinkle();
+
+
+            setTimeout(
+                () => {
+
+                    finalHint.style.opacity =
+                        "1";
+
+                },
+                1800
+            );
+
+        }
+
+    }
+
+
+    draw();
+
+}
+
+
+
+/* =====================================================
+   PARPADEO
+===================================================== */
+
+function startTwinkle() {
+
+    setInterval(
+        () => {
+
+            if (
+                stars.length === 0
+            ) return;
+
+
+            ctx.clearRect(
+
+                0,
+                0,
+
+                starCanvas.width,
+                starCanvas.height
+
+            );
+
+
+            stars.forEach(
+                (
+                    star,
+                    index
+                ) => {
+
+                    const size =
+                        getPixelSize();
+
+
+                    let alpha =
+                        .82 +
+                        Math.random() *
+                        .18;
+
+
+                    if (
+                        index % 19 ===
+                        0
+                    ) {
+
+                        alpha =
+                            .45 +
+                            Math.random() *
+                            .55;
+
+                    }
+
+
+                    ctx.shadowBlur =
+                        size * 1.4;
+
+
+                    ctx.shadowColor =
+                        "rgba(255,255,255,.8)";
+
+
+                    ctx.fillStyle =
+
+                        `rgba(
+                            255,
+                            255,
+                            255,
+                            ${alpha}
+                        )`;
+
+
+                    ctx.fillRect(
+
+                        Math.round(
+                            star.x
+                        ),
+
+                        Math.round(
+                            star.y
+                        ),
+
+                        size,
+
+                        size
+
+                    );
+
+                }
+            );
+
+
+            ctx.shadowBlur =
+                0;
+
+        },
+        350
+    );
+
+}
+
+
+
+/* =====================================================
+   FUEGOS ARTIFICIALES
+===================================================== */
+
+let fireworks = [];
+
+
+function createFirework(
+    x,
+    y
+) {
+
+    const particles = [];
+
+
+    const count =
+
+        20 +
+        Math.floor(
+            Math.random() *
+            16
+        );
+
+
+    const hue =
+
+        Math.floor(
+            Math.random() *
+            360
+        );
+
+
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
+
+        const angle =
+
+            (
+                Math.PI *
+                2 /
+                count
+            ) *
+            i;
+
+
+        const speed =
+
+            1.1 +
+            Math.random() *
+            2.2;
+
+
+        particles.push({
+
+            x:
+                x,
+
+            y:
+                y,
+
+            vx:
+                Math.cos(angle) *
+                speed,
+
+            vy:
+                Math.sin(angle) *
+                speed,
+
+            life:
+                1,
+
+            decay:
+                .012 +
+                Math.random() *
+                .018,
+
+            size:
+                1 +
+                Math.random() *
+                2,
+
+            hue:
+                hue
+
+        });
+
+    }
+
+
+    fireworks.push({
+
+        particles:
+            particles
+
+    });
+
+}
+
+
+
+/* =====================================================
+   FUEGOS AUTOMÁTICOS
+===================================================== */
+
+function automaticFireworks() {
+
+    const x =
+
+        70 +
+        Math.random() *
+        (
+            window.innerWidth -
+            140
+        );
+
+
+    const y =
+
+        70 +
+        Math.random() *
+        (
+            window.innerHeight *
+            .30
+        );
+
+
+    createFirework(
+        x,
+        y
+    );
+
+
+    const nextTime =
+
+        1300 +
+        Math.random() *
+        2200;
+
+
+    setTimeout(
+        automaticFireworks,
+        nextTime
+    );
+
+}
+
+
+
+/* =====================================================
+   ANIMAR FUEGOS
+===================================================== */
+
+function animateFireworks() {
+
+    fwCtx.clearRect(
+
+        0,
+        0,
+
+        fireworksCanvas.width,
+        fireworksCanvas.height
+
+    );
+
+
+    for (
+        let f =
+            fireworks.length - 1;
+
+        f >= 0;
+
+        f--
+    ) {
+
+        const firework =
+            fireworks[f];
+
+
+        for (
+            let p =
+                firework.particles.length - 1;
+
+            p >= 0;
+
+            p--
+        ) {
+
+            const particle =
+                firework.particles[p];
+
+
+            particle.x +=
+                particle.vx;
+
+
+            particle.y +=
+                particle.vy;
+
+
+            particle.vy +=
+                .025;
+
+
+            particle.life -=
+                particle.decay;
+
+
+            if (
+                particle.life <=
+                0
+            ) {
+
+                firework.particles.splice(
+                    p,
+                    1
+                );
+
+                continue;
+
+            }
+
+
+            fwCtx.beginPath();
+
+
+            fwCtx.arc(
+
+                particle.x,
+
+                particle.y,
+
+                particle.size,
+
+                0,
+
+                Math.PI * 2
+
+            );
+
+
+            fwCtx.fillStyle =
+
+                `hsla(
+                    ${particle.hue},
+                    90%,
+                    75%,
+                    ${particle.life}
+                )`;
+
+
+            fwCtx.shadowBlur =
+                8;
+
+
+            fwCtx.shadowColor =
+
+                `hsla(
+                    ${particle.hue},
+                    90%,
+                    70%,
+                    ${particle.life}
+                )`;
+
+
+            fwCtx.fill();
+
+
+            fwCtx.shadowBlur =
+                0;
+
+        }
+
+
+        if (
+            firework.particles.length ===
+            0
+        ) {
+
+            fireworks.splice(
+                f,
+                1
+            );
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        animateFireworks
+    );
+
+}
+
+
+
+/* =====================================================
+   CLICK EN EL CIELO
+===================================================== */
+
+gameScreen.addEventListener(
+    "click",
+    event => {
+
+        createFirework(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   PIXEL ART DE LA PAREJA
+===================================================== */
+
+function pixel(
+    ctx,
+    x,
+    y,
+    size,
+    color
+) {
+
+    ctx.fillStyle =
+        color;
+
+
+    ctx.fillRect(
+
+        Math.round(x),
+        Math.round(y),
+
+        size,
+        size
+
+    );
+
+}
+
+
+
+/* =====================================================
+   MONTAÑA REDONDEADA
+===================================================== */
+
+function drawMountain(
+    ctx,
+    x,
+    y,
+    width,
+    height
+) {
+
+    /*
+       Montaña con cima redondeada.
+    */
+
+    ctx.fillStyle =
+        "#080b16";
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+        x,
+        y + height
+    );
+
+
+    ctx.lineTo(
+        x + width * .10,
+        y + height * .62
+    );
+
+
+    ctx.lineTo(
+        x + width * .20,
+        y + height * .42
+    );
+
+
+    ctx.lineTo(
+        x + width * .30,
+        y + height * .23
+    );
+
+
+    /*
+       Cima redondeada.
+    */
+
+    ctx.quadraticCurveTo(
+
+        x + width * .40,
+        y + height * .04,
+
+        x + width * .52,
+        y + height * .03
+
+    );
+
+
+    ctx.quadraticCurveTo(
+
+        x + width * .64,
+        y + height * .04,
+
+        x + width * .73,
+        y + height * .25
+
+    );
+
+
+    ctx.lineTo(
+        x + width * .84,
+        y + height * .48
+    );
+
+
+    ctx.lineTo(
+        x + width,
+        y + height
+    );
+
+
+    ctx.closePath();
+
+
+    ctx.fill();
+
+
+
+    /*
+       Sombra de la montaña.
+    */
+
+    ctx.fillStyle =
+        "#0d1220";
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+
+        x + width * .52,
+        y + height * .03
+
+    );
+
+
+    ctx.quadraticCurveTo(
+
+        x + width * .64,
+        y + height * .04,
+
+        x + width * .73,
+        y + height * .25
+
+    );
+
+
+    ctx.lineTo(
+        x + width * .84,
+        y + height * .48
+    );
+
+
+    ctx.lineTo(
+        x + width * .92,
+        y + height
+    );
+
+
+    ctx.lineTo(
+        x + width * .55,
+        y + height
+    );
+
+
+    ctx.closePath();
+
+
+    ctx.fill();
+
+
+
+    /*
+       Detalles pixel art.
+    */
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const px =
+
+            x +
+            Math.random() *
+            width;
+
+
+        const py =
+
+            y +
+            height * .55 +
+            Math.random() *
+            height * .45;
+
+
+        const size =
+
+            2 +
+            Math.floor(
+                Math.random() * 4
+            );
+
+
+        pixel(
+
+            ctx,
+
+            px,
+            py,
+
+            size,
+
+            "#11182a"
+
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TU PERSONAJE
+===================================================== */
+
+function drawYou(
+    ctx,
+    x,
+    y,
+    size,
+    bob
+) {
+
+    const skin =
+        "#b97959";
+
+
+    const hair =
+        "#241b18";
+
+
+    const hairLight =
+        "#382823";
+
+
+    const shirt =
+        "#182b42";
+
+
+    const shirtLight =
+        "#29415c";
+
+
+    const pants =
+        "#10131d";
+
+
+    const shoes =
+        "#070911";
+
+
+
+    /*
+       Piernas sentadas.
+    */
+
+    pixel(
+        ctx,
+        x - size * 2,
+        y + size * 8 + bob,
+        size * 3,
+        pants
+    );
+
+
+    pixel(
+        ctx,
+        x + size,
+        y + size * 8 + bob,
+        size * 3,
+        pants
+    );
+
+
+
+    /*
+       Zapatos.
+    */
+
+    pixel(
+        ctx,
+        x - size * 3,
+        y + size * 11 + bob,
+        size * 4,
+        shoes
+    );
+
+
+    pixel(
+        ctx,
+        x + size,
+        y + size * 11 + bob,
+        size * 4,
+        shoes
+    );
+
+
+
+    /*
+       Camiseta azul.
+    */
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 2 + bob,
+        size * 8,
+        shirt
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y + size * 4 + bob,
+        size * 10,
+        shirt
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 6 + bob,
+        size * 8,
+        shirt
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 3 + bob,
+        size * 2,
+        shirtLight
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 2,
+        y + size * 3 + bob,
+        size * 2,
+        shirtLight
+    );
+
+
+
+    /*
+       Cuello.
+    */
+
+    pixel(
+        ctx,
+        x - size,
+        y + size + bob,
+        size * 2,
+        skin
+    );
+
+
+
+    /*
+       Cabeza.
+    */
+
+    pixel(
+        ctx,
+        x - size * 3,
+        y - size * 3 + bob,
+        size * 6,
+        skin
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y - size + bob,
+        size * 8,
+        skin
+    );
+
+
+
+    /*
+       Cabello rizado.
+    */
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y - size * 5 + bob,
+        size * 8,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y - size * 3 + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 3,
+        y - size * 4 + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y - size + bob,
+        size,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 4,
+        y - size + bob,
+        size,
+        hair
+    );
+
+
+
+    /*
+       Rizos.
+    */
+
+    pixel(
+        ctx,
+        x - size * 3,
+        y - size * 6 + bob,
+        size * 2,
+        hairLight
+    );
+
+
+    pixel(
+        ctx,
+        x,
+        y - size * 6 + bob,
+        size * 2,
+        hairLight
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 2,
+        y - size * 5 + bob,
+        size * 2,
+        hairLight
+    );
+
+
+    /*
+       IMPORTANTE:
+       Se eliminaron completamente
+       las gafas/detalles negros.
+    */
+
+}
+
+
+
+/* =====================================================
+   NOVIO
+===================================================== */
+
+function drawBoyfriend(
+    ctx,
+    x,
+    y,
+    size,
+    bob
+) {
+
+    const skin =
+        "#b7785c";
+
+
+    const hair =
+        "#211b1a";
+
+
+    const hairLight =
+        "#302625";
+
+
+    const shirt =
+        "#bcbfc3";
+
+
+    const shirtShadow =
+        "#858b93";
+
+
+    const pants =
+        "#181a20";
+
+
+    const shoes =
+        "#070911";
+
+
+
+    /*
+       Piernas.
+    */
+
+    pixel(
+        ctx,
+        x - size * 2,
+        y + size * 8 + bob,
+        size * 3,
+        pants
+    );
+
+
+    pixel(
+        ctx,
+        x + size,
+        y + size * 8 + bob,
+        size * 3,
+        pants
+    );
+
+
+
+    /*
+       Zapatos.
+    */
+
+    pixel(
+        ctx,
+        x - size * 3,
+        y + size * 11 + bob,
+        size * 4,
+        shoes
+    );
+
+
+    pixel(
+        ctx,
+        x + size,
+        y + size * 11 + bob,
+        size * 4,
+        shoes
+    );
+
+
+
+    /*
+       Camisa clara.
+    */
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 2 + bob,
+        size * 8,
+        shirt
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y + size * 4 + bob,
+        size * 10,
+        shirt
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 6 + bob,
+        size * 8,
+        shirt
+    );
+
+
+
+    /*
+       Franja de camisa.
+    */
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 4 + bob,
+        size * 8,
+        shirtShadow
+    );
+
+
+
+    /*
+       Cuello.
+    */
+
+    pixel(
+        ctx,
+        x - size,
+        y + size + bob,
+        size * 2,
+        skin
+    );
+
+
+
+    /*
+       Cabeza.
+    */
+
+    pixel(
+        ctx,
+        x - size * 3,
+        y - size * 3 + bob,
+        size * 6,
+        skin
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y - size + bob,
+        size * 8,
+        skin
+    );
+
+
+
+    /*
+       Cabello largo.
+    */
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y - size * 5 + bob,
+        size * 8,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y - size * 3 + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 3,
+        y - size * 3 + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 5,
+        y - size + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x - size * 4,
+        y + size * 2 + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 2,
+        y - size + bob,
+        size * 2,
+        hair
+    );
+
+
+    pixel(
+        ctx,
+        x + size * 3,
+        y + size * 2 + bob,
+        size * 2,
+        hair
+    );
+
+
+
+    /*
+       Brillos del cabello.
+    */
+
+    pixel(
+        ctx,
+        x - size * 2,
+        y - size * 6 + bob,
+        size * 2,
+        hairLight
+    );
+
+
+    pixel(
+        ctx,
+        x + size,
+        y - size * 5 + bob,
+        size * 2,
+        hairLight
+    );
+
+}
+
+
+
+/* =====================================================
+   ESCENA DE LA PAREJA
+===================================================== */
+
+function drawCoupleScene(
+    time
+) {
+
+    coupleCtx.clearRect(
+
+        0,
+        0,
+
+        coupleCanvas.width,
+        coupleCanvas.height
+
+    );
+
+
+    const w =
+        coupleCanvas.width;
+
+
+    const h =
+        coupleCanvas.height;
+
+
+
+    /*
+       MONTAÑA
+
+       La base toca exactamente
+       el borde inferior.
+    */
+
+    const mountainWidth =
+
+        Math.min(
+            w * .42,
+            560
+        );
+
+
+    const mountainHeight =
+
+        Math.min(
+            h * .27,
+            250
+        );
+
+
+    const mountainX =
+        w * .01;
+
+
+    const mountainY =
+
+        h -
+        mountainHeight;
+
+
+
+    drawMountain(
+
+        coupleCtx,
+
+        mountainX,
+        mountainY,
+
+        mountainWidth,
+        mountainHeight
+
+    );
+
+
+
+    /*
+       Tamaño de ustedes.
+    */
+
+    let size =
+
+        Math.max(
+            3,
+            Math.min(
+                6,
+                w / 230
+            )
+        );
+
+
+    if (
+        w < 600
+    ) {
+
+        size *= .8;
+
+    }
+
+
+
+    /*
+       Movimiento muy pequeño.
+    */
+
+    const bob =
+
+        Math.sin(
+            time * .0015
+        ) * 1;
+
+
+
+    /*
+       POSICIÓN SOBRE LA MONTAÑA.
+    */
+
+    const coupleY =
+
+        mountainY -
+        size * 4.5;
+
+
+    const youX =
+
+        mountainX +
+        mountainWidth * .43;
+
+
+    const boyfriendX =
+
+        mountainX +
+        mountainWidth * .56;
+
+
+
+    drawYou(
+
+        coupleCtx,
+
+        youX,
+        coupleY,
+
+        size,
+        bob
+
+    );
+
+
+    drawBoyfriend(
+
+        coupleCtx,
+
+        boyfriendX,
+        coupleY + 1,
+
+        size,
+        bob
+
+    );
+
+
+
+    /*
+       No se dibujan luciérnagas ni
+       ningún aura alrededor de ustedes.
+    */
+
+
+    requestAnimationFrame(
+        drawCoupleScene
+    );
+
+}
+
+
+
+/* =====================================================
+   INICIAR JUEGO
+===================================================== */
+
+let animationStarted =
+    false;
+
+
+function startGame() {
+
+    if (
+        animationStarted
+    ) {
+
+        return;
+
+    }
+
+
+    animationStarted =
+        true;
+
+
+    createBackgroundStars();
+
+
+    resizeCanvas();
+
+
+    /*
+       Fuegos artificiales.
+    */
+
+    setTimeout(
+        automaticFireworks,
+        1200
+    );
+
+
+    animateFireworks();
+
+
+    /*
+       Primero aparece el cielo.
+
+       Después aparecen las estrellas
+       formando el mensaje.
+    */
+
+    setTimeout(
+        startStarsAnimation,
+        2500
+    );
+
+}
+
+
+
+/* =====================================================
+   INICIAR PAREJA
+===================================================== */
+
+requestAnimationFrame(
+    drawCoupleScene
+);
+
+</script>
+
+</body>
+</html>
